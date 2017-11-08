@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <!--График с текущими данными-->
+    <div class="card">
+        {{ graph | safe }}
+    </div>
+    <table class="striped" style="">
+        <thead>
+        <tr>
+            <th>Магазин</th>
+            <th style="text-align:right;">Дата</th>
+            <th style="text-align:right;">День недели</th>
+            <th style="text-align:right;">Сумма</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in table_sales %}
+            <tr>
+                <td>{{ post.title }}</td>
+                <td style="text-align:left; width:200px;">{{ post.sale_date }}</td>
+                <td style="text-align:center; width:100px;">{{ post.day_code }}</td>
+                <td style="text-align:center; width:100px;">{{ post.sumsale }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

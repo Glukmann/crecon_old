@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Магазин</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in table %}
+            <tr>
+                <td><a href="{% url 'prognoz' %}?shop={{ post }}">{{ post }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

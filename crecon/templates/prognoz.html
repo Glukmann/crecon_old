@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <!--График с прогнозируемыми данными-->
+    <div class="card">
+        {{ graph | safe }}
+    </div>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th style="text-align:center;">Прогноз</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in table_sales %}
+            <tr>
+                <td style="text-align:left; width:100px;">{{ post.sale_date }}</td>
+                <td style="text-align:center; width:100px;">{{ post.sumsale }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

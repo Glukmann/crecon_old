@@ -2,24 +2,45 @@
 
 {% block content %}
 
-    <hr>
-    <h1>Ваша новая жизнь с сайтом от <span class="big">Социогенетики</span></h1>
-    <hr>
-    <div class="gap-20"></div>
-
     <div class="row">
-        <div class="col-lg-9">
-
-            {{ page.content|safe }}
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content">
+                    Crecon - open source проект по прогнозированию продаж при помощи нейронных сетей.
+                    Мы используем открытые библиотеки: fbprophet и keras, для достижения целей.
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h3 class="text-left">Мысли деревьев</h3>
-
-            <div class="panel">
-                <p class="small">Песню, что ветер несет, пропой.</p>
-                <p class="small">Мы будем сидеть под деревом,</p>
-                <p class="small">Просто сидеть под деревом</p>
-                <p class="small">И слышать его мысли...</p>
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content">
+                    <p class="">Загрузите данные и мы их обработаем</p>
+                    <form action="{{ request.build_absolute_uri }}upload/" method="POST" enctype="multipart/form-data"
+                          class="">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Файл</span>
+                                <input type="file" name="file"/>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Загрузите файл с данными">
+                            </div>
+                        </div>
+                        <input class="btn" type="submit" value="Загрузить файл"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content">
+                    <p class="">Здесь мы можете просмотреть загруженные и обработанные данные</p>
+                    <a class="" href="{% url 'select' %}">Текущие данные</a>
+                    <hr>
+                    <a class="" href="{% url 'select_prognoz' %}">Прогнозируемые данные fbprophet</a>
+                    <hr>
+                    <a class="" href="{% url 'select_prognoz_keras' %}">Прогнозируемые данные keras</a>
+                </div>
             </div>
         </div>
     </div>
