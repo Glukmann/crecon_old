@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'tinymce',
 
     'bootstrap3',
+    'crecon.apps.CreconConfig',
 
     ###===user-generated-apps===###
 )

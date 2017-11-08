@@ -1,5 +1,4 @@
 django
-south
 django-tinymce
 git+https://github.com/sociogenetics/xendor.git#egg=xendor
 git+https://github.com/sociogenetics/mpttadmin.git#egg=mpttadmin
@@ -10,3 +9,8 @@ django-grappelli
 django-bootstrap3
 #raven
 simplejson
+keras
+fbprophet
+pandas
+numpy
+plotly
