@@ -1,0 +1,12 @@
+django
+south
+django-tinymce
+git+https://github.com/sociogenetics/xendor.git#egg=xendor
+git+https://github.com/sociogenetics/mpttadmin.git#egg=mpttadmin
+#git+https://github.com/barbuza/supercaptcha#egg=supercaptcha
+django-mptt
+django-filebrowser
+django-grappelli
+django-bootstrap3
+#raven
+simplejson

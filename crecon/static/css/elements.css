@@ -1,0 +1,53 @@
+/*main menu*/
+header .nav {
+    margin-top: 15px;
+    float: right;
+}
+    header .nav li {
+        float: left;
+    }
+        header .nav li a {
+            background: #c33a2c;
+            color: #ffffff;
+        }
+        header .nav li a:hover, header .nav li.active a {
+            background: #000000;
+            color: #ffffff;
+        }
+
+.logo {
+    margin-top: 15px;
+}
+    .logo img {
+        height: 100px;
+    }
+
+.xendor {
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 36px;
+}
+
+.panel {
+    border: 1px solid rgba(255, 84, 50, 0.40);
+    border-radius: 2px;
+    background: #f6f6f6;
+    padding: 20px;
+    padding-bottom: 10px;
+}
+
+.breadcrumb {
+    background: none;
+    padding: 0;
+    float: right;
+    margin-top: -10px;
+}
+
+.content img {
+    border: 1px solid rgba(255, 84, 50, 0.40);
+    padding: 3px;
+    width: 100%;
+    height: 100%;
+}

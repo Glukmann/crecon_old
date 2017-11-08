@@ -1,0 +1,33 @@
+/*uncomment this to fix footer to bottom */
+* {
+    margin: 0;
+    padding: 0;
+}
+html {height: 100%;}
+
+body {
+    min-height: 100%;
+    position: relative;
+}
+
+header {
+
+}
+
+body > .container {
+    position: relative;
+    padding-bottom: 70px;
+}
+
+
+footer {
+    height: 55px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: black;
+    color: #e1e1e1;
+}
+footer > .container{
+    margin-top: 10px;
+}
