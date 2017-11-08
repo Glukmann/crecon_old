@@ -2,7 +2,7 @@
 import os
 import csv
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import Salestring
 from .graphics import Graph
 from .keras import Graph_keras
@@ -22,26 +22,35 @@ def select(request):
 
 def saleslist(request):
     g = Graph()
-    shop = request.GET['shop']
-    table_sales = Salestring.objects.filter(title=shop)
-    context = g.get_context_data(table_sales)
-    return render(request, 'data.html', {'table_sales' : table_sales, 'graph' : context})
+    try:
+        shop = request.GET['shop']
+        table_sales = Salestring.objects.filter(title=shop)
+        context = g.get_context_data(table_sales)
+        return render(request, 'data.html', {'table_sales': table_sales, 'graph': context})
+    except:
+        raise Http404("No MyModel matches the given query.")
 
 def prognoz(request):
-    shop = request.GET['shop']
-    g = Graph()
-    table_sales = Salestring.objects.filter(title=shop)
-    context = g.prognoz(table_sales)
+    try:
+        shop = request.GET['shop']
+        g = Graph()
+        table_sales = Salestring.objects.filter(title=shop)
+        context = g.prognoz(table_sales)
 
-    return render(request, 'prognoz.html', {'table_sales' : table_sales, 'graph' : context})
+        return render(request, 'prognoz.html', {'table_sales' : table_sales, 'graph' : context})
+    except:
+        raise Http404("No MyModel matches the given query.")
 
 def prognoz_keras(request):
-    shop = request.GET['shop']
-    g = Graph_keras()
-    table_sales = Salestring.objects.filter(title=shop)
-    context = g.prognoz(table_sales)
+    try:
+        shop = request.GET['shop']
+        g = Graph_keras()
+        table_sales = Salestring.objects.filter(title=shop)
+        context = g.prognoz(table_sales)
 
-    return render(request, 'prognoz_keras.html', {'table_sales' : table_sales, 'graph' : context})
+        return render(request, 'prognoz_keras.html', {'table_sales' : table_sales, 'graph' : context})
+    except:
+        raise Http404("No MyModel matches the given query.")
 
 def select_prognoz(request):
     sell_object = Salestring.objects.order_by().values_list('title').distinct()
