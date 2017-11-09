@@ -1,9 +1,5 @@
 django
 django-tinymce
-git+https://github.com/sociogenetics/mpttadmin.git#egg=mpttadmin
-django-mptt
-django-filebrowser
-django-grappelli
 django-bootstrap3
 simplejson
 keras
