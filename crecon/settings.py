@@ -21,9 +21,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2*_)ma(s6ggon16#lttsuo2)10w@8z-yuv@%+62#^8$@ggijk('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 NEED_REGENERATE_MODELS = ['Page', ]
 
@@ -35,8 +35,8 @@ ADMINS = (
 # Application definition
 
 INSTALLED_APPS = (
-    'grappelli',
-    'filebrowser',
+#    'grappelli',
+#    'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,10 +47,10 @@ INSTALLED_APPS = (
 
     # 'south',
 
-    'mptt',
-    'mpttadmin',
+    # 'mptt',
+    # 'mpttadmin',
 
-    'tinymce',
+    # 'tinymce',
 
     'bootstrap3',
     'crecon.apps.CreconConfig',
