@@ -38,3 +38,5 @@ nosetests.xml
 .settings
 .settings/*
 settings.py
+crecon/public/media/uploads/
+upload/
