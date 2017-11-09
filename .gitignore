@@ -37,3 +37,4 @@ nosetests.xml
 .idea
 .settings
 .settings/*
+settings.py
