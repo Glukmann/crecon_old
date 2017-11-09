@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import Salestring
 from .graphics import Graph
-from .keras import Graph_keras
+from .keras_local import Graph_keras
 
 
 
