@@ -41,16 +41,17 @@ def prognoz(request):
     except:
         raise Http404("No MyModel matches the given query.")
 
-def prognoz_keras(request):
-    try:
-        shop = request.GET['shop']
-        g = Graph_keras()
-        table_sales = Salestring.objects.filter(title=shop)
-        context = g.prognoz(table_sales)
 
-        return render(request, 'prognoz_keras.html', {'table_sales' : table_sales, 'graph' : context})
-    except:
-        raise Http404("No MyModel matches the given query.")
+def prognoz_keras(request):
+    # try:
+    shop = request.GET['shop']
+    g = Graph_keras()
+    table_sales = Salestring.objects.filter(title=shop)
+    context = g.prognoz(table_sales)
+
+    return render(request, 'prognoz_keras.html', {'table_sales': table_sales, 'graph': context})
+    # except:
+    #     raise Http404("No MyModel matches the given query.")
 
 def select_prognoz(request):
     sell_object = Salestring.objects.order_by().values_list('title').distinct()
