@@ -67,7 +67,7 @@ class Graph(TemplateView):
 
         ngod = pd.DataFrame({
             'holiday': 'ngod',
-            'ds': pd.to_datetime(['2015-12-30','2016-12-30', '2017-12-30']),
+            'ds': pd.to_datetime(['2015-12-30', '2015-12-30', '2016-12-30', '2017-12-30']),
             'lower_window': -10,
             'upper_window': 0,
         })
