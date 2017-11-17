@@ -67,14 +67,14 @@ class Graph(TemplateView):
 
         ngod = pd.DataFrame({
             'holiday': 'ngod',
-            'ds': pd.to_datetime(['2016-12-30', '2017-12-30']),
+            'ds': pd.to_datetime(['2015-12-30','2016-12-30', '2017-12-30']),
             'lower_window': -10,
             'upper_window': 0,
         })
         valday = pd.DataFrame({
             'holiday': 'valday',
-            'ds': pd.to_datetime(['2016-02-14', '2017-02-14', '2018-02-14',
-                                  '2016-03-08', '2017-03-08', '2018-02-14']),
+            'ds': pd.to_datetime(['2015-02-14', '2016-02-14', '2017-02-14', '2018-02-14',
+                                  '2015-03-08', '2016-03-08', '2017-03-08', '2018-02-14']),
             'lower_window': -3,
             'upper_window': 1,
         })

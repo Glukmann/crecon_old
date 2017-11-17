@@ -9,3 +9,4 @@ numpy
 plotly
 TensorFlow
 uwsgi
+django-loginza
