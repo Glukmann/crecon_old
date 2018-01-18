@@ -2,54 +2,89 @@
 from django.views.generic.base import TemplateView
 from keras.models import Sequential
 from keras.callbacks import ReduceLROnPlateau
-from keras import optimizers
 from keras.layers import Dense, Activation, LeakyReLU, BatchNormalization
 import plotly.offline as opy
 import plotly.graph_objs as go
 import numpy as np
+import pandas as pd
 
 # pip install --user numpy scipy matplotlib ipython jupyter pandas sympy nose
 
 class Graph_keras(TemplateView):
     def prognoz(self, data_df):
+
         vertical = [row.sumsale for row in data_df]
         horizontal = [row.sale_date for row in data_df]
 
         for index in range(len(horizontal)):
             horizontal[index] = horizontal[index].strftime('%Y-%m-%d')
 
-        data = np.random.random((1000, 100))
-        labels = np.random.randint(2, size=(1000, 1))
+        q = data_df.values('sale_date')
+        df_date = pd.DataFrame.from_records(q)
 
-        forecast=[]
+        vertical_x = vertical
+
+        for index in range(len(vertical_x)):
+            a= [vertical_x[index]]
+            vertical_x[index]=a
+
+        y_train_y = vertical_x
+
+        y_train = np.array(vertical_x)
+
+        df_date['year'] = pd.Series(1, index=df_date.index)
+        df_date['month'] = pd.Series(1, index=df_date.index)
+        df_date['day'] = pd.Series(1, index=df_date.index)
+
+        x_train = df_date.as_matrix()
+
+        for index in x_train:
+            index[1] = index[0].strftime('%Y-%m-%d')[0:4]
+
+        for index in x_train:
+            index[2] = index[0].strftime('%Y-%m-%d')[5:7]
+
+        for index in x_train:
+            index[3] = index[0].strftime('%Y-%m-%d')[8:10]
+
+        x_train = np.delete(x_train, 0,1)
+
+        x_train = x_train.astype(float)
+        y_train = y_train.astype(float)
+
+        forecast = []
+
+        mean = x_train.mean(axis=0)
+        std = x_train.std(axis=0)
+        x_train -= mean
+        x_train /= std
 
         model = Sequential()
-        model.add(Dense(32, activation='relu', input_dim=1))
-        model.add(BatchNormalization())
-        model.add(LeakyReLU())
-        model.add(Dense(1, activation='sigmoid'))
-        model.add(Activation('softmax'))
+        model.add(Dense(400, input_dim=3, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(300, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(200, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(100, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(50, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(1, activation="relu", kernel_initializer="normal"))
 
-        reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.9, patience=5, min_lr=0.001, verbose=1)
-        model.compile(optimizer='rmsprop',
-                      loss='sparse_categorical_crossentropy',
-                      metrics=['accuracy'])
+        model.compile(loss="logcosh", optimizer="Adagrad", metrics=["mae"])
+        model.fit(x_train, y_train_y, epochs=100, validation_split=0.1, verbose=2)
 
-        history = model.fit(vertical, horizontal,
-                            nb_epoch=50,
-                            batch_size=32,
-                            verbose=1,
-                            # validation_data=(horizontal, vertical),
-                            shuffle=True,
-                            callbacks=[reduce_lr])
+        # mse, mae = model.evaluate(x_train, y_train, verbose=0)
 
-        pred = model.predict(np.array(horizontal))
-        original = vertical
-        predicted = pred
+        pred = model.predict(x_train)
+        plan_list = []
+        res_list = []
+        for i in range(len(x_train)):
+            # print("Date: {}, plan: {}, fact {}".format(x_train[i], pred[i][0], y_train[i][0]))
+            plan_list.append(pred[i][0])
+            res_list.append(y_train[i][0])
 
+        l = [i for i in range(len(x_train))]
+        #
         figure_or_data = [go.Scatter(x=horizontal, y=vertical, name="current data", mode="lines+markers"),
-                          go.Scatter(x=forecast.ds, y=forecast.yhat, name="Keras",
-                                     line=dict(dash="dot"))]
+                          go.Scatter(x=horizontal, y=plan_list, name="Keras",
+                                      line=dict(dash="dot"))]
 
         plot_html = opy.plot(
             figure_or_data, True, "Open in new window", True, "div")

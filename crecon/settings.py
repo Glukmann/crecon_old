@@ -84,6 +84,7 @@ TEMPLATES = [
     },
 ]
 
+
 ROOT_URLCONF = 'crecon.urls'
 
 WSGI_APPLICATION = 'crecon.wsgi.application'
@@ -165,8 +166,10 @@ TINYMCE_DEFAULT_CONFIG = {
     'relative_urls': False,
 }
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'loginza.authentication.LoginzaBackend',
+)
 
-GRAPPELLI_ADMIN_HEADLINE = u'Агентство «Социогенетика»'
-GRAPPELLI_ADMIN_TITLE = u'Агентство «Социогенетика»'
-
-
+FACEBOOK_APP_ID = '540390736294908'
+FACEBOOK_API_SECRET = '08358f663e44f11cc3abd203c8bc0890'
