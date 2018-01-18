@@ -92,7 +92,7 @@ class Graph(TemplateView):
         df['cap'] = 4000
         df['floor'] = 1500
 
-        m = Prophet(holidays=holidays, holidays_prior_scale=10, changepoint_prior_scale=0.05, growth='logistic', mcmc_samples=10)
+        m = Prophet(holidays=holidays, holidays_prior_scale=10, changepoint_prior_scale=0.05, growth='logistic', mcmc_samples=10, yearly_seasonality=True)
         m.add_regressor('nfl_sunday')
         m.add_seasonality(
             name='weekly', period=7, fourier_order=3, prior_scale=0.1)

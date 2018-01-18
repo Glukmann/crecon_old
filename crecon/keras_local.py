@@ -16,13 +16,15 @@ class Graph_keras(TemplateView):
         vertical = [row.sumsale for row in data_df]
         horizontal = [row.sale_date for row in data_df]
 
+        horizontal_date = [row.sale_date for row in data_df]
+
         for index in range(len(horizontal)):
             horizontal[index] = horizontal[index].strftime('%Y-%m-%d')
 
         q = data_df.values('sale_date')
         df_date = pd.DataFrame.from_records(q)
 
-        vertical_x = vertical
+        vertical_x = [row.sumsale for row in data_df]
 
         for index in range(len(vertical_x)):
             a= [vertical_x[index]]
@@ -60,11 +62,11 @@ class Graph_keras(TemplateView):
         x_train /= std
 
         model = Sequential()
-        model.add(Dense(400, input_dim=3, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(300, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(200, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(100, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(50, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(60, input_dim=3, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(2, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(60, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(2, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(60, activation="relu", kernel_initializer="normal"))
         model.add(Dense(1, activation="relu", kernel_initializer="normal"))
 
         model.compile(loss="logcosh", optimizer="Adagrad", metrics=["mae"])
@@ -82,10 +84,36 @@ class Graph_keras(TemplateView):
 
         l = [i for i in range(len(x_train))]
         #
-        figure_or_data = [go.Scatter(x=horizontal, y=vertical, name="current data", mode="lines+markers"),
-                          go.Scatter(x=horizontal, y=plan_list, name="Keras",
+        figure_or_data = [go.Scatter(x=horizontal_date, y=vertical, name="current data", mode="lines+markers"),
+                          go.Scatter(x=horizontal_date, y=plan_list, name="Keras",
                                       line=dict(dash="dot"))]
 
+        layout = dict(
+            xaxis=dict(
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=1,
+                             label='1 month',
+                             step='month',
+                             stepmode='backward'),
+                        dict(count=6,
+                             label='6 month',
+                             step='month',
+                             stepmode='backward'),
+                        dict(count=1,
+                             label='1 year',
+                             step='year',
+                             stepmode='backward'),
+                        dict(step='all')
+                    ])
+                ),
+                rangeslider=dict(),
+                type='date'
+            )
+        )
+
+        fig = dict(data=figure_or_data, layout=layout)
+
         plot_html = opy.plot(
-            figure_or_data, True, "Open in new window", True, "div")
+            fig, True, "open in new window", True, "div")
         return plot_html
