@@ -7,6 +7,7 @@ import plotly.offline as opy
 import plotly.graph_objs as go
 import numpy as np
 import pandas as pd
+from keras.losses import logcosh
 
 # pip install --user numpy scipy matplotlib ipython jupyter pandas sympy nose
 
@@ -51,8 +52,8 @@ class Graph_keras(TemplateView):
 
         x_train = np.delete(x_train, 0,1)
 
-        x_train = x_train.astype(float)
-        y_train = y_train.astype(float)
+        x_train = x_train.astype('float32')
+        y_train = y_train.astype('float32')
 
         forecast = []
 
@@ -63,13 +64,12 @@ class Graph_keras(TemplateView):
 
         model = Sequential()
         model.add(Dense(60, input_dim=3, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(2, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(3, activation="relu", kernel_initializer="normal"))
         model.add(Dense(60, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(2, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(60, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(3, activation="relu", kernel_initializer="normal"))
         model.add(Dense(1, activation="relu", kernel_initializer="normal"))
 
-        model.compile(loss="logcosh", optimizer="Adagrad", metrics=["mae"])
+        model.compile(loss='mse', optimizer='rmsprop', metrics=['mae'])
         model.fit(x_train, y_train_y, epochs=100, validation_split=0.1, verbose=2)
 
         # mse, mae = model.evaluate(x_train, y_train, verbose=0)
