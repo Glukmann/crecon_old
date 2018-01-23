@@ -63,12 +63,12 @@ class Graph_keras(TemplateView):
         x_train /= std
 
         model = Sequential()
-        model.add(Dense(60, input_dim=3, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(3, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(60, activation="relu", kernel_initializer="normal"))
-        model.add(Dense(3, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(400, input_dim=3, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(300, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(200, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(100, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(50, activation="relu", kernel_initializer="normal"))
         model.add(Dense(1, activation="relu", kernel_initializer="normal"))
-
         model.compile(loss='mse', optimizer='rmsprop', metrics=['mae'])
         model.fit(x_train, y_train_y, epochs=100, validation_split=0.1, verbose=2)
 
