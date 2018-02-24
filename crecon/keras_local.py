@@ -10,7 +10,7 @@ from keras.losses import logcosh
 # pip install --user numpy scipy matplotlib ipython jupyter pandas sympy nose
 
 class Graph_keras(TemplateView):
-    def prognoz(self, data_df):
+    def prognoz(data_df):
         horizontal = [row.sale_date for row in data_df]
 
         horizontal_date = [row.sale_date for row in data_df]

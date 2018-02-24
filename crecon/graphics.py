@@ -52,12 +52,12 @@ class Graph(TemplateView):
         figure_or_data = []
 
         if metods.fbprophet:
-            x_prophets, y_prophets = Graph_prophet.prognoz(self,data_df)
+            x_prophets, y_prophets = Graph_prophet.prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_prophets, y=y_prophets, name="FbProphet", line=dict(dash="dot")))
 
 
         if metods.keras:
-            x_keras, y_keras = Graph_keras.prognoz(self,data_df)
+            x_keras, y_keras = Graph_keras.prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_keras, y=y_keras, name="Keras", line=dict(dash="dot")))
 
         vertical = [row.sumsale for row in data_df]

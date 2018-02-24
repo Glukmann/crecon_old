@@ -8,7 +8,7 @@ import numpy as np
 # pip install fbprophet
 
 class Graph_prophet(TemplateView):
-    def prognoz(self, data_df):
+    def prognoz(data_df):
         predictions = 60
 
         y = [row.sumsale for row in data_df]
