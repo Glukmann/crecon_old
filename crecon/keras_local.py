@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from django.views.generic.base import TemplateView
 from keras.models import Sequential
 from keras.callbacks import ReduceLROnPlateau
 from keras.layers import Dense, Activation, LeakyReLU, BatchNormalization
@@ -9,8 +8,8 @@ from keras.losses import logcosh
 
 # pip install --user numpy scipy matplotlib ipython jupyter pandas sympy nose
 
-class Graph_keras(TemplateView):
-    def prognoz(data_df):
+class Graph_keras():
+    def prognoz(self, data_df):
         horizontal = [row.sale_date for row in data_df]
 
         horizontal_date = [row.sale_date for row in data_df]

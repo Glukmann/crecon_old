@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.views.generic.base import TemplateView
 from fbprophet import Prophet
 import pandas as pd
 
 import numpy as np
 # pip install fbprophet
 
-class Graph_prophet(TemplateView):
-    def prognoz(data_df):
+class Graph_prophet():
+    def prognoz(self, data_df):
         predictions = 60
 
         y = [row.sumsale for row in data_df]

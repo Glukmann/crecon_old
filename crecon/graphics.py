@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 import plotly.offline as opy
 import plotly.graph_objs as go
-from django.views.generic.base import TemplateView
 from .fbprophet_local import Graph_prophet
 from .keras_local import Graph_keras
 
@@ -10,7 +9,7 @@ class metods:
     fbprophet= False
     keras=False
 
-class Graph(TemplateView):
+class Graph():
     def get_context_data(self, data_df):
         vertical = [row.sumsale for row in data_df]
         horizontal = [row.sale_date for row in data_df]
@@ -49,15 +48,19 @@ class Graph(TemplateView):
         return plot_html
 
     def universal_prognoz(self, data_df, metods):
+        data_to_send = data_df
+
         figure_or_data = []
 
         if metods.fbprophet:
-            x_prophets, y_prophets = Graph_prophet.prognoz(data_df)
+            gp= Graph_prophet()
+            x_prophets, y_prophets = gp.prognoz(data_to_send)
             figure_or_data.append(go.Scatter(x=x_prophets, y=y_prophets, name="FbProphet", line=dict(dash="dot")))
 
 
         if metods.keras:
-            x_keras, y_keras = Graph_keras.prognoz(data_df)
+            gk = Graph_keras()
+            x_keras, y_keras = gk.prognoz(data_to_send)
             figure_or_data.append(go.Scatter(x=x_keras, y=y_keras, name="Keras", line=dict(dash="dot")))
 
         vertical = [row.sumsale for row in data_df]
