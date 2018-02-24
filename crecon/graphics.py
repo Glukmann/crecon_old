@@ -6,8 +6,9 @@ from .fbprophet_local import Graph_prophet
 from .keras_local import Graph_keras
 
 class Metods:
-    fbprophet= False
-    keras=False
+
+    fbprophet = False
+    keras = False
 
 class Graph():
     def get_context_data(self, data_df):
@@ -47,18 +48,15 @@ class Graph():
 
         return plot_html
 
-    def universal_prognoz(self, data_df, metods):
-        data_to_send = data_df
-
+    def universal_prognoz(self, data_df, Metods):
         figure_or_data = []
 
-        if metods.fbprophet:
+        if Metods.fbprophet:
             gprophets= Graph_prophet()
             x_prophets, y_prophets = gprophets.prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_prophets, y=y_prophets, name="FbProphet", line=dict(dash="dot")))
 
-
-        if metods.keras:
+        if Metods.keras:
             gkeras = Graph_keras()
             x_keras, y_keras = gkeras.prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_keras, y=y_keras, name="Keras", line=dict(dash="dot")))

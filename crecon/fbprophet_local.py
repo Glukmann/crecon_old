@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from fbprophet import Prophet
 import pandas as pd
 
-import numpy as np
 # pip install fbprophet
 
 class Graph_prophet():

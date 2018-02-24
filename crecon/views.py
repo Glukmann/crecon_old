@@ -36,12 +36,15 @@ def prognoz(request):
         if form.is_valid():
             for key, val in form.cleaned_data.items():
                 setattr(Metods, key, val)
-                shop = form.data['mag']
-                g = Graph()
-                table_sales = Salestring.objects.filter(title=shop)
-                context = g.universal_prognoz(table_sales, Metods)
 
-                return render(request, 'prognoz.html', {'table_sales': table_sales, 'graph': context})
+            shop = form.data['mag']
+            g = Graph()
+            table_sales = Salestring.objects.filter(title=shop)
+            context = g.universal_prognoz(table_sales, Metods)
+
+            return render(request, 'prognoz.html', {'table_sales': table_sales, 'graph': context})
+        else:
+            raise Http404("No MyModel matches the given query.")
     else:
         raise Http404("No MyModel matches the given query.")
 
