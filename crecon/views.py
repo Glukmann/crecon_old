@@ -27,7 +27,7 @@ def saleslist(request):
         context = g.get_context_data(table_sales)
         return render(request, 'data.html', {'table_sales': table_sales, 'graph': context})
     except:
-        raise Http404("No MyModel matches the given query.")
+        raise Http404("No shop matches the given query.")
 
 def prognoz(request):
     # if this is a POST request we need to process the form data
@@ -44,7 +44,7 @@ def prognoz(request):
 
                 return render(request, 'prognoz.html', {'table_sales': table_sales, 'graph': context})
             except:
-                raise Http404("No MyModel matches the given query.")
+                raise Http404("No shop matches the given query.")
     else:
         raise Http404("No MyModel matches the given query.")
 
