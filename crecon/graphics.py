@@ -5,7 +5,7 @@ import plotly.graph_objs as go
 from .fbprophet_local import Graph_prophet
 from .keras_local import Graph_keras
 
-class metods:
+class Metods:
     fbprophet= False
     keras=False
 
@@ -53,14 +53,14 @@ class Graph():
         figure_or_data = []
 
         if metods.fbprophet:
-            gp= Graph_prophet()
-            x_prophets, y_prophets = gp.prognoz(data_to_send)
+            gprophets= Graph_prophet()
+            x_prophets, y_prophets = gprophets.prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_prophets, y=y_prophets, name="FbProphet", line=dict(dash="dot")))
 
 
         if metods.keras:
-            gk = Graph_keras()
-            x_keras, y_keras = gk.prognoz(data_to_send)
+            gkeras = Graph_keras()
+            x_keras, y_keras = gkeras.prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_keras, y=y_keras, name="Keras", line=dict(dash="dot")))
 
         vertical = [row.sumsale for row in data_df]

@@ -4,7 +4,7 @@ import csv
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Salestring
-from .graphics import Graph, metods
+from .graphics import Graph, Metods
 from .forms import SettingsForm
 
 
@@ -35,11 +35,11 @@ def prognoz(request):
         form = SettingsForm(request.POST)
         if form.is_valid():
             for key, val in form.cleaned_data.items():
-                setattr(metods, key, val)
+                setattr(Metods, key, val)
                 shop = form.data['mag']
                 g = Graph()
                 table_sales = Salestring.objects.filter(title=shop)
-                context = g.universal_prognoz(table_sales, metods)
+                context = g.universal_prognoz(table_sales, Metods)
 
                 return render(request, 'prognoz.html', {'table_sales': table_sales, 'graph': context})
     else:
