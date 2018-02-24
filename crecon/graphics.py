@@ -4,11 +4,13 @@ import plotly.offline as opy
 import plotly.graph_objs as go
 from .fbprophet_local import Graph_prophet
 from .keras_local import Graph_keras
+from .arima_local import Graph_arima
 
 class Metods:
 
     fbprophet = False
     keras = False
+    arima = False
 
 class Graph():
     def get_context_data(self, data_df):
@@ -60,6 +62,11 @@ class Graph():
             gkeras = Graph_keras()
             x_keras, y_keras = gkeras.prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_keras, y=y_keras, name="Keras", line=dict(dash="dot")))
+
+        if Metods.arima:
+            garima = Graph_arima()
+            x_arima, y_arima = garima.prognoz(data_df)
+            figure_or_data.append(go.Scatter(x=x_arima, y=y_arima, name="ARIMA", line=dict(dash="dot")))
 
         vertical = [row.sumsale for row in data_df]
         horizontal = [row.sale_date for row in data_df]

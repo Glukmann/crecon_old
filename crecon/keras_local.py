@@ -33,6 +33,7 @@ class Graph_keras():
         df_date['year'] = pd.Series(1, index=df_date.index)
         df_date['month'] = pd.Series(1, index=df_date.index)
         df_date['day'] = pd.Series(1, index=df_date.index)
+        df_date['week'] = pd.Series(1, index=df_date.index)
 
         x_train = df_date.as_matrix()
 
@@ -45,6 +46,9 @@ class Graph_keras():
         for index in x_train:
             index[3] = index[0].strftime('%Y-%m-%d')[8:10]
 
+        for index in x_train:
+            index[4] = index[0].weekday()
+
         x_train = np.delete(x_train, 0,1)
 
         x_train = x_train.astype('float32')
@@ -56,7 +60,7 @@ class Graph_keras():
         x_train /= std
 
         model = Sequential()
-        model.add(Dense(400, input_dim=3, activation="relu", kernel_initializer="normal"))
+        model.add(Dense(400, input_dim=4, activation="relu", kernel_initializer="normal"))
         model.add(Dense(300, activation="relu", kernel_initializer="normal"))
         model.add(Dense(200, activation="relu", kernel_initializer="normal"))
         model.add(Dense(100, activation="relu", kernel_initializer="normal"))

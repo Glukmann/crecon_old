@@ -48,9 +48,9 @@ def prognoz(request):
 
             return render(request, 'prognoz.html', {'table_sales': table_sales, 'graph': context})
         else:
-            raise Http404("No MyModel matches the given query.")
+            raise Http404("no valide form")
     else:
-        raise Http404("No MyModel matches the given query.")
+        raise Http404("fucking wrong.")
 
 def select_prognoz(request):
     form = SettingsForm()

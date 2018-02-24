@@ -21,3 +21,4 @@ class Article(models.Model):
 class Settings(models.Model):
     fbprophet = models.BooleanField()
     keras = models.BooleanField()
+    arima = models.BooleanField()
