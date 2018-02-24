@@ -3,8 +3,6 @@ from django.views.generic.base import TemplateView
 from keras.models import Sequential
 from keras.callbacks import ReduceLROnPlateau
 from keras.layers import Dense, Activation, LeakyReLU, BatchNormalization
-import plotly.offline as opy
-import plotly.graph_objs as go
 import numpy as np
 import pandas as pd
 from keras.losses import logcosh
@@ -13,8 +11,6 @@ from keras.losses import logcosh
 
 class Graph_keras(TemplateView):
     def prognoz(self, data_df):
-
-        vertical = [row.sumsale for row in data_df]
         horizontal = [row.sale_date for row in data_df]
 
         horizontal_date = [row.sale_date for row in data_df]
@@ -55,8 +51,6 @@ class Graph_keras(TemplateView):
         x_train = x_train.astype('float32')
         y_train = y_train.astype('float32')
 
-        forecast = []
-
         mean = x_train.mean(axis=0)
         std = x_train.std(axis=0)
         x_train -= mean
@@ -82,38 +76,7 @@ class Graph_keras(TemplateView):
             plan_list.append(pred[i][0])
             res_list.append(y_train[i][0])
 
-        l = [i for i in range(len(x_train))]
-        #
-        figure_or_data = [go.Scatter(x=horizontal_date, y=vertical, name="current data", mode="lines+markers"),
-                          go.Scatter(x=horizontal_date, y=plan_list, name="Keras",
-                                      line=dict(dash="dot"))]
+        x = horizontal_date
+        y = plan_list
 
-        layout = dict(
-            xaxis=dict(
-                rangeselector=dict(
-                    buttons=list([
-                        dict(count=1,
-                             label='1 month',
-                             step='month',
-                             stepmode='backward'),
-                        dict(count=6,
-                             label='6 month',
-                             step='month',
-                             stepmode='backward'),
-                        dict(count=1,
-                             label='1 year',
-                             step='year',
-                             stepmode='backward'),
-                        dict(step='all')
-                    ])
-                ),
-                rangeslider=dict(),
-                type='date'
-            )
-        )
-
-        fig = dict(data=figure_or_data, layout=layout)
-
-        plot_html = opy.plot(
-            fig, True, "open in new window", True, "div")
-        return plot_html
+        return x,y

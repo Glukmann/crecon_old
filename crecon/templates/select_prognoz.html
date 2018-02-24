@@ -2,19 +2,34 @@
 {% load staticfiles %}
 
 {% block content %}
-    <table class="striped">
-        <thead>
-        <tr>
-            <th>Магазин</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for post in table %}
+
+    <form action="{% url 'prognoz' %}" method="post">
+        {% csrf_token %}
+        <table class="striped">
+            <thead>
             <tr>
-                <td><a href="{% url 'prognoz' %}?shop={{ post }}">{{ post }}</a></td>
+                <th>Прогноз</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            {{ settingsform }}
+        </table>
+
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>Магазин</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in table %}
+                <tr>
+                    <th><label for="id_mag">{{ post }}</label></th><td><input type="checkbox" name="mag" id="id_mag" value="{{ post }}"/></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <input type="submit" value="Показать" />
+    </form>
+
 {% endblock %}
 

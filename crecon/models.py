@@ -18,3 +18,6 @@ class Salestring(models.Model):
 class Article(models.Model):
     file_obj = models.FileField(upload_to='media/')
 
+class Settings(models.Model):
+    fbprophet = models.BooleanField()
+    keras = models.BooleanField()
