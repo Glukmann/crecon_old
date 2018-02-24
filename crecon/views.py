@@ -37,7 +37,11 @@ def prognoz(request):
             for key, val in form.cleaned_data.items():
                 setattr(Metods, key, val)
 
-            shop = form.data['mag']
+            try:
+                shop = form.data['mag']
+            except:
+                raise Http404("No shop matches the given query.")
+
             g = Graph()
             table_sales = Salestring.objects.filter(title=shop)
             context = g.universal_prognoz(table_sales, Metods)
