@@ -1,3 +1,8 @@
+/*Materialize checkbox and radio opacity fix*/
+input[type="checkbox"], input[type="radio"]{
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
 
 /*html {
     --header-bg-color: rgb(25, 75, 150);
