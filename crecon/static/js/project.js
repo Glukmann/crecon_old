@@ -1,6 +1,6 @@
-/*js for project*/
-$(document).ready(function(){
-
-	
-	return true;
-});
+// /*js for project*/
+// $(document).ready(function(){
+//
+//
+// 	return true;
+// });
