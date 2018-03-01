@@ -6,7 +6,8 @@ import pandas as pd
 # pip install fbprophet
 
 class Graph_prophet():
-    def prognoz(self, data_df):
+    @staticmethod
+    def prognoz(data_df):
         predictions = 60
 
         y = [row.sumsale for row in data_df]

@@ -5,6 +5,7 @@ import plotly.graph_objs as go
 from .fbprophet_local import Graph_prophet
 from .keras_local import Graph_keras
 from .arima_local import Graph_arima
+from .keras_LSTM_local import Graph_keras_LSTM
 
 class Metods:
 
@@ -54,19 +55,20 @@ class Graph():
         figure_or_data = []
 
         if Metods.fbprophet:
-            gprophets= Graph_prophet()
-            x_prophets, y_prophets = gprophets.prognoz(data_df)
+            x_prophets, y_prophets = Graph_prophet().prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_prophets, y=y_prophets, name="FbProphet", line=dict(dash="dot")))
 
         if Metods.keras:
-            gkeras = Graph_keras()
-            x_keras, y_keras = gkeras.prognoz(data_df)
+            x_keras, y_keras = Graph_keras().prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_keras, y=y_keras, name="Keras", line=dict(dash="dot")))
 
         if Metods.arima:
-            garima = Graph_arima()
-            x_arima, y_arima = garima.prognoz(data_df)
+            x_arima, y_arima = Graph_arima().prognoz(data_df)
             figure_or_data.append(go.Scatter(x=x_arima, y=y_arima, name="ARIMA", line=dict(dash="dot")))
+
+        if Metods.keras_LSTM:
+            x_keras_LSTM, y_keras_LSTM = Graph_keras_LSTM().prognoz(data_df)
+            figure_or_data.append(go.Scatter(x=x_keras_LSTM, y=y_keras_LSTM, name="ARIMA", line=dict(dash="dot")))
 
         vertical = [row.sumsale for row in data_df]
         horizontal = [row.sale_date for row in data_df]

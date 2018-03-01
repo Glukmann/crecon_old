@@ -10,4 +10,4 @@ class ArticleForm(ModelForm):
 class SettingsForm(forms.ModelForm):
     class Meta:
         model = Settings
-        fields = ['fbprophet', 'keras', 'arima']
+        fields = ['fbprophet', 'keras', 'arima', 'keras_LSTM']

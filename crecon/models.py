@@ -22,3 +22,4 @@ class Settings(models.Model):
     fbprophet = models.BooleanField()
     keras = models.BooleanField()
     arima = models.BooleanField()
+    keras_LSTM = models.BooleanField()

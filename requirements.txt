@@ -10,3 +10,5 @@ plotly
 TensorFlow
 uwsgi
 pyflux
+matplotlib
+sklearn

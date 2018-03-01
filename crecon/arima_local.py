@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-import numpy as np
 import pandas as pd
 import pyflux as pf
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 
 class Graph_arima():
-    def prognoz(self, data_df):
+    @staticmethod
+    def prognoz(data_df):
         y = [row.sumsale for row in data_df]
         ds = [row.sale_date for row in data_df]
 
