@@ -68,7 +68,7 @@ class Graph():
 
         if Metods.keras_LSTM:
             x_keras_LSTM, y_keras_LSTM = Graph_keras_LSTM().prognoz(data_df)
-            figure_or_data.append(go.Scatter(x=x_keras_LSTM, y=y_keras_LSTM, name="ARIMA", line=dict(dash="dot")))
+            figure_or_data.append(go.Scatter(x=x_keras_LSTM, y=y_keras_LSTM, name="keras_LSTM", line=dict(dash="dot")))
 
         vertical = [row.sumsale for row in data_df]
         horizontal = [row.sale_date for row in data_df]
